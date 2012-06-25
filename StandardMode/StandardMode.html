@@ -1,0 +1,88 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" >
+<head>
+    <title>Untitled Page</title>
+    <script type="text/javascript" src="calculator.utility.js" />
+    <script type="text/javascript" src="calculator.operators.js" />
+    <script type="text/javascript" src="calculator.standardMode.js" />
+    <script type="text/javascript">
+        var calc = new calculator.standardMode();
+        function clean() {
+            calc.clean();
+        }
+        function backspace() {
+            calc.backspace();
+        }
+        function plus() {
+            //calc.plus(
+        }
+        function minus() {
+
+        }
+        function multiply() {
+
+        }
+        function divide() {
+
+        }
+        function compute() {
+        
+        }
+        
+        function inputNumber(inNumber) {
+
+        }
+        function inputPoint() {
+            
+        }
+        
+    </script>
+</head>
+<body>
+    <table style="text-align:center;">
+      <tr>
+        <td colspan="5">
+          <input type="text" name="expDisplay" id="expDisplay" />
+        </td>
+      </tr>
+      <tr>
+        <td colspan="5">
+          <input type="text" name="currentInput" id="currentInput" />
+        </td>
+      </tr>
+      <tr>
+        <td id="squareRoot" onclick="#">√</td>
+        <td id="percent" onclick="#">%</td>
+        <td id="clean" onclick="clean();">C</td>
+        <td colspan="2" id="backspace" onclick="backspace();">←</td>
+      </tr>
+      <tr>
+        <td id="seven" onclick="inputNumber(7);">7</td>
+        <td id="eight" onclick="inputNumber(8);">8</td>
+        <td id="nine" onclick="inputNumber(9);">9</td>
+        <td id="leftBracket" onclick="#">(</td>
+        <td id="rightBracket" onclick="#">)</td>
+      </tr>
+      <tr>
+        <td id="four" onclick="inputNumber(4);">4</td>
+        <td id="five" onclick="inputNumber(5);">5</td>
+        <td id="six" onclick="inputNumber(6);">6</td>
+        <td id="plus" onclick="plus();">+</td>
+        <td id="minus" onclick="minus();">-</td>
+      </tr>
+      <tr>
+        <td id="one" onclick="inputNumber(1);">1</td>
+        <td id="two" onclick="inputNumber(2);">2</td>
+        <td id="three" onclick="inputNumber(3);">3</td>
+        <td id="asterisk" onclick="multiply();">*</td>
+        <td id="slash" onclick="divide();">/</td>
+      </tr>
+      <tr>
+        <td id="positiveNegative" onclick="#" >±</td>
+        <td id="zero" onclick="inputNumber(0);">0</td>
+        <td id="point" onclick="inputPoint();">.</td>
+        <td colspan="2" id="compute" onclick="compute();">=</td>
+      </tr>
+    </table>
+</body>
+</html>

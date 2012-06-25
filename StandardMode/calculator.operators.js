@@ -19,7 +19,7 @@ calculator.operators.multiply = function(op1, op2) {
 
 calculator.operators.divide = function(op1, op2) {
     if (op2 == 0) {
-
+        throw new Error("divisor cannot be zero.[divide method]");
     }
     return op1 / op2;
 }
@@ -30,7 +30,7 @@ calculator.operators.percent = function(op) {
 
 calculator.operators.squareRoot = function(op) {
     if (op < 0) {
-
+        throw new Error("operand cannot be negative.[squareRoot]");
     }
     return Math.sqrt(op);
 }

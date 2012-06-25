@@ -3,33 +3,16 @@ Microsoft Visual Studio Solution File, Format Version 10.00
 # Visual Studio 2008
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "StandardMode", "StandardMode", "{8347ABFC-5B5C-4CE9-9FCD-D3B514B6C3C0}"
 	ProjectSection(SolutionItems) = preProject
-		test.js = test.js
+		StandardMode\calculator.operators.js = StandardMode\calculator.operators.js
+		StandardMode\calculator.standardMode.js = StandardMode\calculator.standardMode.js
+		StandardMode\calculator.utility.js = StandardMode\calculator.utility.js
+		StandardMode\StandardMode.html = StandardMode\StandardMode.html
 	EndProjectSection
-EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "UI", "UI", "{265B0FAD-71AD-4CFE-A32D-056CA9E329B1}"
-	ProjectSection(SolutionItems) = preProject
-		StandardMode.html = StandardMode.html
-	EndProjectSection
-EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "BLL", "BLL", "{ED3BCD01-E11F-4566-A8F6-D9BC79AD4AC0}"
-	ProjectSection(SolutionItems) = preProject
-		calculator.operators.js = calculator.operators.js
-	EndProjectSection
-EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Test", "Test", "{30BADFA3-D956-4135-888E-42ACA6D8C3F0}"
-EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Utitlity", "Utitlity", "{D97C9CBA-6F02-4196-896F-050625B60D2C}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Resources", "Resources", "{CBBF0E66-C607-4984-95A7-2919271A0CF3}"
 EndProject
 Global
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
-	EndGlobalSection
-	GlobalSection(NestedProjects) = preSolution
-		{265B0FAD-71AD-4CFE-A32D-056CA9E329B1} = {8347ABFC-5B5C-4CE9-9FCD-D3B514B6C3C0}
-		{ED3BCD01-E11F-4566-A8F6-D9BC79AD4AC0} = {8347ABFC-5B5C-4CE9-9FCD-D3B514B6C3C0}
-		{30BADFA3-D956-4135-888E-42ACA6D8C3F0} = {8347ABFC-5B5C-4CE9-9FCD-D3B514B6C3C0}
-		{D97C9CBA-6F02-4196-896F-050625B60D2C} = {8347ABFC-5B5C-4CE9-9FCD-D3B514B6C3C0}
 	EndGlobalSection
 EndGlobal
