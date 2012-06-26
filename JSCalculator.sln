@@ -10,6 +10,10 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "StandardMode", "StandardMod
 	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Resources", "Resources", "{CBBF0E66-C607-4984-95A7-2919271A0CF3}"
+	ProjectSection(SolutionItems) = preProject
+		Resources\JS Calculator User Case.doc = Resources\JS Calculator User Case.doc
+		Resources\JS Calculator.doc = Resources\JS Calculator.doc
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionProperties) = preSolution
