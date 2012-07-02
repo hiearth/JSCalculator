@@ -54,23 +54,3 @@ calculator.ternaryExpression = function(leftExp, middleExp, rightExp, operator) 
 calculator.ternaryExpression.prototype.compute = function() {
     return this.operator(this.leftExp, this.middleExp, this.rightExp);
 }
-
-
-// expressionBuilder
-calculator.expressionBuilder = function() { }
-
-calculator.expressionBuilder.prototype.createLiteral = function(number) {
-    return new calculator.literalExpression(number);
-}
-
-calculator.expressionBuilder.prototype.createUnary = function(exp, operator) {
-    return new calculator.unaryExpression(exp, operator);
-}
-
-calculator.expressionBuilder.prototype.createBinary = function(leftExp, rightExp, operator) {
-    return new calculator.binaryExpression(leftExp, rightExp, operator);
-}
-
-calculator.expressionBuilder.prototype.createTernary = function(leftExp, middleExp, rightExp, operator) {
-    return new calculator.ternaryExpression(leftExp, middleExp, rightExp, operator);
-}
