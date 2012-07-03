@@ -24,31 +24,67 @@ calculator.expressionBuilder.prototype.appendOperator = function(inOperator) {
     // 4. if existing operands and operators can compute, compute.
 }
 
-// the logic of expression construction is complicated, 
-// so I should decompose the expresson to simple expressions and then assemble them
-calculator.expressionBuilder.getExpression = function() {
-    var operands = new Array();
-    var operators = new Array();
-    for (var index = 0; index < this.expressionFragment.length; index++) {
-        var expAtom = this.expressionFragment[index];
-        if (this.isOperator(expAtom)) {
-            operators.push(expAtom);
-        }
-        else {
-            operands.push(expAtom);
-        }
+calculator.expressionBuilder.prototype.getExpression = function() {
+    if (this.currentInput != null) {
+        this.expressionFragment.push(this.currentInput);
+        this.currentInput = null;
     }
-    
-    // construct an expression from operands and operators
-    // return this expression.
+    return this.buildExpression(this.expressionFragment);
 }
 
-calculator.expressionBuilder.isOperator = function(inOperator){
-    
+// the logic of expression construction is complicated,
+// so I should decompose the expresson to simple expressions and then assemble them
+calculator.expressionBuilder.prototype.buildExpression = function(expressionFragment) {
+    if (expressionFragment.length == 0) {
+        return null;
+    }
+    if (expressionFragment.length == 1) {
+        return this.createLiteral(expressionFragment[0]);
+    }
+    // binary operator
+    var lowestOperator = this.findLowestPriorityOperator(expressionFragment);
+    var rootOperator = lowestOperator.operator;
+    var separateIndex = lowestOperator.index;
+    var leftExpFragment = expressionFragment.slice(0, separateIndex);
+    var rightExpFragment = expressionFragment.slice(separateIndex + 1, expressionFragment.length);
+    var leftExp = this.buildExpression(leftExpFragment);
+    var rightExp = this.buildExpression(rightExpFragment);
+
+    return this.createBinary(leftExp, rightExp, rootOperator);
+}
+
+calculator.expressionBuilder.prototype.comparePriotiry = function(inOperator1, inOperator2) {
+    return calculator.operators.comparePriotiry(inOperator1, inOperator2);
+}
+
+// initial version
+// only + - * /
+calculator.expressionBuilder.prototype.findLowestPriorityOperator = function(expressionFragment) {
+    // return the operator index and the operator object.
+    var lowestOperator = null;
+    var lowestIndex = 0;
+    for (var index = 0; index < expressionFragment.length; index++) {
+        var expAtom = expressionFragment[index];
+        if (this.isOperator(expAtom)) {
+            if (lowestOperator == null
+                || this.comparePriotiry(lowestOperator, expAtom) >= 0) {
+                lowestOperator = expAtom;
+                lowestIndex = index;
+            }
+        }
+    }
+    return {
+        "index": lowestIndex,
+        "operator": lowestOperator
+    };
+}
+
+calculator.expressionBuilder.prototype.isOperator = function(inOperator) {
+    return calculator.operators.isOperator(inOperator);
 }
 
 calculator.expressionBuilder.prototype.createLiteral = function(number) {
-    return new calculator.literalExpression(number);
+    return new calculator.literalExpression(parseFloat(number));
 }
 
 calculator.expressionBuilder.prototype.createUnary = function(exp, operator) {

@@ -14,7 +14,7 @@ calculator.literalExpression = function(number) {
 }
 
 calculator.literalExpression.prototype.compute = function() {
-    return this.number == null ? "" : this.number.toString();
+    return this.number == null ? "" : this.number;
 }
 
 // unaryExpression
@@ -40,6 +40,12 @@ calculator.binaryExpression = function(leftExp, rightExp, operator) {
     this.operator = operator;
 }
 
+calculator.binaryExpression.prototype.compute = function() {
+    var leftOperand = this.leftExp.compute();
+    var rightOperand = this.rightExp.compute();
+    return this.operator(leftOperand, rightOperand);
+}
+
 // ternaryExpression
 calculator.ternaryExpression = function(leftExp, middleExp, rightExp, operator) {
     if (operator == null) {
@@ -52,5 +58,8 @@ calculator.ternaryExpression = function(leftExp, middleExp, rightExp, operator) 
 }
 
 calculator.ternaryExpression.prototype.compute = function() {
+    var leftOperand = this.leftExp.compute();
+    var middleOperand = this.middleExp.compute();
+    var rightOperand = this.rightExp.compute();
     return this.operator(this.leftExp, this.middleExp, this.rightExp);
 }
