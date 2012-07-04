@@ -11,6 +11,8 @@
 
     <script type="text/javascript" src="../calculator.expressionBuilder.js"></script>
 
+    <script type="text/javascript" src="../calculator.expressionState.js"></script>
+
     <script type="text/javascript" src="calculator.standardMode.js"></script>
 
     <script type="text/javascript">
@@ -22,16 +24,16 @@
             calc.backspace();
         }
         function plus() {
-            calc.setCurrentOperator(calc.plus);
+            calc.appendOperator(calc.plus);
         }
         function minus() {
-            calc.setCurrentOperator(calc.minus);
+            calc.appendOperator(calc.minus);
         }
         function multiply() {
-            calc.setCurrentOperator(calc.multiply);
+            calc.appendOperator(calc.multiply);
         }
         function divide() {
-            calc.setCurrentOperator(calc.divide);
+            calc.appendOperator(calc.divide);
         }
         function compute() {
             calc.compute();
@@ -41,13 +43,6 @@
         }
         function inputPoint() {
             calc.appendNumber(".");
-        }
-        function updateDisplay() {
-            $("currentInput").value = calc.currentInput;
-            $("expDisplay").value = calc.expression;
-            if (calc.result != null) {
-                $("currentInput").value = calc.result;
-            }
         }
         function test() {
             inputNumber(1);

@@ -5,6 +5,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "StandardMode", "StandardMod
 	ProjectSection(SolutionItems) = preProject
 		calculator.expression.js = calculator.expression.js
 		calculator.expressionBuilder.js = calculator.expressionBuilder.js
+		calculator.expressionState.js = calculator.expressionState.js
 		StandardMode\calculator.operators.js = StandardMode\calculator.operators.js
 		StandardMode\calculator.standardMode.js = StandardMode\calculator.standardMode.js
 		StandardMode\calculator.utility.js = StandardMode\calculator.utility.js

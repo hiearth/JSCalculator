@@ -5,9 +5,6 @@ if (typeof calculator == "undefined") {
 
 // expressionBuilder
 
-// use one array to store expressoin
-// use two array to compute expression
-// when compute, first construct expression, then compute.
 calculator.expressionBuilder = function() {
     this.expressionFragment = new Array();
     this.currentInput = null;
@@ -18,10 +15,18 @@ calculator.expressionBuilder.prototype.appendNumber = function(inNumber) {
 }
 
 calculator.expressionBuilder.prototype.appendOperator = function(inOperator) {
-    this.expressionFragment.push(this.currentInput);
+    if (this.currentInput != null) {
+        this.expressionFragment.push(this.currentInput);
+    }
     this.currentInput = null;
     this.expressionFragment.push(inOperator);
-    // 4. if existing operands and operators can compute, compute.
+}
+
+calculator.expressionBuilder.prototype.getExpressionResult = function() {
+    var expression = this.getExpression();
+    if (expression != null) {
+        return expression.compute();
+    }
 }
 
 calculator.expressionBuilder.prototype.getExpression = function() {
@@ -53,8 +58,8 @@ calculator.expressionBuilder.prototype.buildExpression = function(expressionFrag
     return this.createBinary(leftExp, rightExp, rootOperator);
 }
 
-calculator.expressionBuilder.prototype.comparePriotiry = function(inOperator1, inOperator2) {
-    return calculator.operators.comparePriotiry(inOperator1, inOperator2);
+calculator.expressionBuilder.prototype.comparePriority = function(inOperator1, inOperator2) {
+    return calculator.operators.comparePriority(inOperator1, inOperator2);
 }
 
 // initial version
@@ -67,7 +72,7 @@ calculator.expressionBuilder.prototype.findLowestPriorityOperator = function(exp
         var expAtom = expressionFragment[index];
         if (this.isOperator(expAtom)) {
             if (lowestOperator == null
-                || this.comparePriotiry(lowestOperator, expAtom) >= 0) {
+                || this.comparePriority(lowestOperator, expAtom) >= 0) {
                 lowestOperator = expAtom;
                 lowestIndex = index;
             }
@@ -97,4 +102,8 @@ calculator.expressionBuilder.prototype.createBinary = function(leftExp, rightExp
 
 calculator.expressionBuilder.prototype.createTernary = function(leftExp, middleExp, rightExp, operator) {
     return new calculator.ternaryExpression(leftExp, middleExp, rightExp, operator);
+}
+
+calculator.expressionBuilder.prototype.toString = function() {
+    return this.expressionFragment.join(" ");
 }
