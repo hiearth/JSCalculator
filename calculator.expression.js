@@ -8,13 +8,22 @@ calculator.expression = function() { }
 
 calculator.expression.prototype.compute = function() { }
 
+calculator.expression.prototype.isExpression = function(inExpression) {
+    return inExpression.prototype instanceof calculator.expression;
+}
+
 // literalExpression
 calculator.literalExpression = function(number) {
     this.number = number;
+    this.prototype = new calculator.expression();
 }
 
 calculator.literalExpression.prototype.compute = function() {
     return this.number == null ? "" : this.number;
+}
+
+calculator.literalExpression.prototype.toString = function() {
+    return this.number == null ? "" : this.number.toString();
 }
 
 // unaryExpression
@@ -24,10 +33,15 @@ calculator.unaryExpression = function(exp, operator) {
     }
     this.exp = exp;
     this.operator = operator;
+    this.prototype = new calculator.expression();
 }
 
 calculator.unaryExpression.prototype.compute = function() {
     return this.operator(this.exp);
+}
+
+calculator.unaryExpression.prototype.toString = function() {
+    return this.operator.toString() + this.exp == null ? "" : this.exp.toString();
 }
 
 // binaryExpression
@@ -38,12 +52,17 @@ calculator.binaryExpression = function(leftExp, rightExp, operator) {
     this.leftExp = leftExp;
     this.rightExp = rightExp;
     this.operator = operator;
+    this.prototype = new calculator.expression();
 }
 
 calculator.binaryExpression.prototype.compute = function() {
     var leftOperand = this.leftExp.compute();
     var rightOperand = this.rightExp.compute();
     return this.operator(leftOperand, rightOperand);
+}
+
+calculator.binaryExpression.prototype.toString = function() {
+    return "(" + this.leftExp.toString() + " " + this.operator.toString() + " " + this.rightExp.toString() + ")";
 }
 
 // ternaryExpression
@@ -55,6 +74,7 @@ calculator.ternaryExpression = function(leftExp, middleExp, rightExp, operator) 
     this.middleExp = middleExp;
     this.rightExp = rightExp;
     this.operator = operator;
+    this.prototype = new calculator.expression();
 }
 
 calculator.ternaryExpression.prototype.compute = function() {
@@ -62,4 +82,11 @@ calculator.ternaryExpression.prototype.compute = function() {
     var middleOperand = this.middleExp.compute();
     var rightOperand = this.rightExp.compute();
     return this.operator(this.leftExp, this.middleExp, this.rightExp);
+}
+
+calculator.ternaryExpression.prototype.toString = function() {
+    return this.operator.toString()
+           + "("
+           + this.leftExp.toString() + " " + this.middleExp.toString() + " " + this.rightExp.toString()
+           + ")";
 }

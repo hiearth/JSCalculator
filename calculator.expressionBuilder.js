@@ -6,8 +6,13 @@ if (typeof calculator == "undefined") {
 // expressionBuilder
 
 calculator.expressionBuilder = function() {
+    this.init();
+}
+
+calculator.expressionBuilder.prototype.init = function() {
     this.expressionFragment = new Array();
     this.currentInput = null;
+    this.expressionFactory = new calculator.expressionFactory();
 }
 
 calculator.expressionBuilder.prototype.appendNumber = function(inNumber) {
@@ -20,6 +25,10 @@ calculator.expressionBuilder.prototype.appendOperator = function(inOperator) {
     }
     this.currentInput = null;
     this.expressionFragment.push(inOperator);
+}
+
+calculator.expressionBuilder.prototype.appendExpression = function(inExpression) {
+    this.expressionFragment.push(inExpression);
 }
 
 calculator.expressionBuilder.prototype.getExpressionResult = function() {
@@ -44,7 +53,10 @@ calculator.expressionBuilder.prototype.buildExpression = function(expressionFrag
         return null;
     }
     if (expressionFragment.length == 1) {
-        return this.createLiteral(expressionFragment[0]);
+        if (calculator.expression.prototype.isExpression(expressionFragment[0])) {
+            return expressionFragment[0];
+        }
+        return this.expressionFactory.createLiteral(expressionFragment[0]);
     }
     // binary operator
     var lowestOperator = this.findLowestPriorityOperator(expressionFragment);
@@ -55,11 +67,7 @@ calculator.expressionBuilder.prototype.buildExpression = function(expressionFrag
     var leftExp = this.buildExpression(leftExpFragment);
     var rightExp = this.buildExpression(rightExpFragment);
 
-    return this.createBinary(leftExp, rightExp, rootOperator);
-}
-
-calculator.expressionBuilder.prototype.comparePriority = function(inOperator1, inOperator2) {
-    return calculator.operators.comparePriority(inOperator1, inOperator2);
+    return this.expressionFactory.createBinary(leftExp, rightExp, rootOperator);
 }
 
 // initial version
@@ -84,24 +92,16 @@ calculator.expressionBuilder.prototype.findLowestPriorityOperator = function(exp
     };
 }
 
+calculator.expressionBuilder.prototype.clearExpression = function() {
+    this.expressionFragment = new Array();
+}
+
+calculator.expressionBuilder.prototype.comparePriority = function(inOperator1, inOperator2) {
+    return calculator.operators.comparePriority(inOperator1, inOperator2);
+}
+
 calculator.expressionBuilder.prototype.isOperator = function(inOperator) {
     return calculator.operators.isOperator(inOperator);
-}
-
-calculator.expressionBuilder.prototype.createLiteral = function(number) {
-    return new calculator.literalExpression(parseFloat(number));
-}
-
-calculator.expressionBuilder.prototype.createUnary = function(exp, operator) {
-    return new calculator.unaryExpression(exp, operator);
-}
-
-calculator.expressionBuilder.prototype.createBinary = function(leftExp, rightExp, operator) {
-    return new calculator.binaryExpression(leftExp, rightExp, operator);
-}
-
-calculator.expressionBuilder.prototype.createTernary = function(leftExp, middleExp, rightExp, operator) {
-    return new calculator.ternaryExpression(leftExp, middleExp, rightExp, operator);
 }
 
 calculator.expressionBuilder.prototype.toString = function() {

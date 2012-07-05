@@ -3,8 +3,10 @@ Microsoft Visual Studio Solution File, Format Version 10.00
 # Visual Studio 2008
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "StandardMode", "StandardMode", "{8347ABFC-5B5C-4CE9-9FCD-D3B514B6C3C0}"
 	ProjectSection(SolutionItems) = preProject
+		calculator.displayState.js = calculator.displayState.js
 		calculator.expression.js = calculator.expression.js
 		calculator.expressionBuilder.js = calculator.expressionBuilder.js
+		calculator.expressionFactory.js = calculator.expressionFactory.js
 		calculator.expressionState.js = calculator.expressionState.js
 		StandardMode\calculator.operators.js = StandardMode\calculator.operators.js
 		StandardMode\calculator.standardMode.js = StandardMode\calculator.standardMode.js
