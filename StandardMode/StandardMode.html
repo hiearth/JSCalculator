@@ -68,20 +68,32 @@
             background-color: #AFAFFF;
             cursor: pointer;
         }
+        td:hover
+        {
+            background-color: #8888FF;
+        }
+        td:active
+        {
+            background-color: #88FF88;
+        }
+        .leftTd
+        {
+            width: 20%;
+        }
         table
         {
             text-align: center;
-            width:400px;
-            height:400px;
+            width: 400px;
+            height: 400px;
         }
         .inputDisplay
         {
-        	width:90%;
-        	height:95%;
+            width: 90%;
+            height: 95%;
         }
         input
         {
-        	width:90%;
+            width: 90%;
         }
     </style>
 </head>
@@ -99,7 +111,7 @@
                 </td>
             </tr>
             <tr>
-                <td id="squareRoot" onclick="#">
+                <td id="squareRoot" class="leftTd" onclick="#">
                     √
                 </td>
                 <td id="percent" onclick="#">
