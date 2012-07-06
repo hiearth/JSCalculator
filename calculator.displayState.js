@@ -61,7 +61,7 @@ calculator.instantComputeState.prototype.nextStateByNumber = function(inExpressi
 
 //expAsWholeState
 calculator.expAsWholeState = function(inExpressionBuilder) {
-    var expAsWhole = inExpressionBuilder.getExpression();
+    var expAsWhole =  inExpressionBuilder.getExpression();
     inExpressionBuilder.init();
     inExpressionBuilder.appendExpression(expAsWhole);
 }

@@ -28,7 +28,8 @@ calculator.expressionBuilder.prototype.appendOperator = function(inOperator) {
 }
 
 calculator.expressionBuilder.prototype.appendExpression = function(inExpression) {
-    this.expressionFragment.push(inExpression);
+    var bracketExp = this.expressionFactory.createBracket(inExpression);
+    this.expressionFragment.push(bracketExp);
 }
 
 calculator.expressionBuilder.prototype.getExpressionResult = function() {

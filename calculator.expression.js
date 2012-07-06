@@ -26,6 +26,19 @@ calculator.literalExpression.prototype.toString = function() {
     return this.number == null ? "" : this.number.toString();
 }
 
+calculator.bracketExpression = function(exp) {
+    this.exp = exp;
+    this.prototype = new calculator.expression();
+}
+
+calculator.bracketExpression.prototype.compute = function() {
+    return this.exp.compute();
+}
+
+calculator.bracketExpression.prototype.toString = function() {
+    return "(" + this.exp.toString() + ")";
+}
+
 // unaryExpression
 calculator.unaryExpression = function(exp, operator) {
     if (operator == null) {
@@ -41,7 +54,7 @@ calculator.unaryExpression.prototype.compute = function() {
 }
 
 calculator.unaryExpression.prototype.toString = function() {
-    return this.operator.toString() + this.exp == null ? "" : this.exp.toString();
+    return this.operator.toString() + this.exp.toString();
 }
 
 // binaryExpression
@@ -62,7 +75,7 @@ calculator.binaryExpression.prototype.compute = function() {
 }
 
 calculator.binaryExpression.prototype.toString = function() {
-    return "(" + this.leftExp.toString() + " " + this.operator.toString() + " " + this.rightExp.toString() + ")";
+    return this.leftExp.toString() + " " + this.operator.toString() + " " + this.rightExp.toString();
 }
 
 // ternaryExpression
@@ -86,7 +99,5 @@ calculator.ternaryExpression.prototype.compute = function() {
 
 calculator.ternaryExpression.prototype.toString = function() {
     return this.operator.toString()
-           + "("
-           + this.leftExp.toString() + " " + this.middleExp.toString() + " " + this.rightExp.toString()
-           + ")";
+           + this.leftExp.toString() + " " + this.middleExp.toString() + " " + this.rightExp.toString();
 }

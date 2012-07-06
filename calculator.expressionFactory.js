@@ -9,6 +9,10 @@ calculator.expressionFactory.prototype.createLiteral = function(number) {
     return new calculator.literalExpression(parseFloat(number));
 }
 
+calculator.expressionFactory.prototype.createBracket = function(exp) {
+    return new calculator.bracketExpression(exp);
+}
+
 calculator.expressionFactory.prototype.createUnary = function(exp, operator) {
     return new calculator.unaryExpression(exp, operator);
 }
