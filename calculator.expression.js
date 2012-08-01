@@ -4,19 +4,23 @@ if (typeof calculator == "undefined") {
 }
 
 // expression interface
-calculator.expression = function() { }
+calculator.expression = function() {
+    this.name = "expression";
+}
 
 calculator.expression.prototype.compute = function() { }
 
 calculator.expression.prototype.isExpression = function(inExpression) {
-    return inExpression.prototype instanceof calculator.expression;
+    return inExpression instanceof calculator.expression;
 }
 
 // literalExpression
 calculator.literalExpression = function(number) {
+    calculator.expression.call(this);
     this.number = number;
-    this.prototype = new calculator.expression();
 }
+
+calculator.literalExpression.prototype = new calculator.expression();
 
 calculator.literalExpression.prototype.compute = function() {
     return this.number == null ? "" : this.number;
@@ -27,9 +31,11 @@ calculator.literalExpression.prototype.toString = function() {
 }
 
 calculator.bracketExpression = function(exp) {
+    calculator.expression.call(this);
     this.exp = exp;
-    this.prototype = new calculator.expression();
 }
+
+calculator.bracketExpression.prototype = new calculator.expression();
 
 calculator.bracketExpression.prototype.compute = function() {
     return this.exp.compute();
@@ -44,10 +50,12 @@ calculator.unaryExpression = function(exp, operator) {
     if (operator == null) {
         throw new Error("argument 'operator' null exception.");
     }
+    calculator.expression.call(this);
     this.exp = exp;
     this.operator = operator;
-    this.prototype = new calculator.expression();
 }
+
+calculator.unaryExpression.prototype = new calculator.expression();
 
 calculator.unaryExpression.prototype.compute = function() {
     return this.operator(this.exp);
@@ -62,11 +70,13 @@ calculator.binaryExpression = function(leftExp, rightExp, operator) {
     if (operator == null) {
         throw new Error("argument 'operator' null exception.");
     }
+    calculator.expression.call(this);
     this.leftExp = leftExp;
     this.rightExp = rightExp;
     this.operator = operator;
-    this.prototype = new calculator.expression();
 }
+
+calculator.binaryExpression.prototype = new calculator.expression();
 
 calculator.binaryExpression.prototype.compute = function() {
     var leftOperand = this.leftExp.compute();
@@ -83,12 +93,14 @@ calculator.ternaryExpression = function(leftExp, middleExp, rightExp, operator) 
     if (operator == null) {
         throw new Error("argument 'operator' null exception.");
     }
+    calculator.expression.call(this);
     this.leftExp = leftExp;
     this.middleExp = middleExp;
     this.rightExp = rightExp;
     this.operator = operator;
-    this.prototype = new calculator.expression();
 }
+
+calculator.ternaryExpression.prototype = new calculator.expression();
 
 calculator.ternaryExpression.prototype.compute = function() {
     var leftOperand = this.leftExp.compute();
